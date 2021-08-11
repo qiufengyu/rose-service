@@ -16,7 +16,7 @@ public class StudentController {
 
     @GetMapping("/{id}")
     public @ResponseBody Student getStudent(@PathVariable(name = "id")Integer id) {
-        return studentService.cancel(id);
+        return studentService.test(id);
     }
 
     @GetMapping("/status/{status}")

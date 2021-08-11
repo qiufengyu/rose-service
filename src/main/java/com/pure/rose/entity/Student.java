@@ -1,11 +1,9 @@
 package com.pure.rose.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
+@Table(name = "student")
 public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -13,6 +11,7 @@ public class Student {
 
     String name;
 
+    @Column(name = "status")
     String status;
 
     public Student() {

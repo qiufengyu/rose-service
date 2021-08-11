@@ -14,7 +14,7 @@ public class StudentCustomRepositoryImpl implements StudentCustomRepository {
 
     @Override
     public List<Student> findStudentByStatus(String status) {
-        Query query = entityManager.createNativeQuery("SELECT * FROM student s where s.status = ?1 limit 1 for update", Student.class)
+        Query query = entityManager.createNativeQuery("SELECT * FROM student s where s.status = ?1 limit 1", Student.class)
                 .setParameter(1, status);
         List<Student> s = (List<Student>)query.getResultList();
         return s;
@@ -22,7 +22,7 @@ public class StudentCustomRepositoryImpl implements StudentCustomRepository {
 
     @Override
     public Student findStudentById(Integer id) {
-        Query query = entityManager.createNativeQuery("SELECT * FROM student s where s.id = ?1 for update", Student.class)
+        Query query = entityManager.createNativeQuery("SELECT * FROM student s where s.id = ?1", Student.class)
                 .setParameter(1, id);
         Student s = (Student)query.getSingleResult();
         return s;
@@ -30,7 +30,7 @@ public class StudentCustomRepositoryImpl implements StudentCustomRepository {
 
     @Override
     public void updateStudentById(Integer id, String status) {
-        entityManager.createNativeQuery("UPDATE student s set s.status = ?1 where s.id = ?2")
+        entityManager.createNativeQuery("UPDATE student s set status = ?1 where s.id = ?2")
                 .setParameter(1, status)
                 .setParameter(2, id)
                 .executeUpdate();

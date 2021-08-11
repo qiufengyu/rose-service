@@ -1,39 +1,50 @@
 package com.pure.rose.service;
 
+import com.pure.rose.entity.Course;
 import com.pure.rose.entity.Student;
+import com.pure.rose.repository.CourseRepository;
 import com.pure.rose.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @Service
 public class StudentService {
     @Autowired
     StudentRepository studentRepository;
 
+    @Autowired
+    CourseRepository courseRepository;
+
+    UtilService utilService;
+
+    @Autowired
+    public StudentService(UtilService utilService) {
+        this.utilService = utilService;
+    }
+
     @Transactional
-    public Student cancel(Integer id) {
-        Student s = studentRepository.findStudentById(id);
-        studentRepository.updateStudentById(s.getId(), "Q");
+    public Student test(Integer id) {
+        Student st = studentRepository.findStudentById(id);
+        List<Student> s = IntStream.range(100, 120).boxed().map(sid -> new Student(null, "s" + sid, "A")).collect(Collectors.toList());
+        studentRepository.saveAll(s);
         try {
-            Thread.sleep(20000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+            utilService.perform(s.get(0));
+        } catch (Throwable exception) {
+            exception.printStackTrace();
         }
-        return s;
+        System.out.println(s.get(0).getStatus());
+        return s.get(0);
     }
 
     @Transactional
     public List<Student> schedule(String status) {
         List<Student> s = studentRepository.findStudentByStatus(status);
-        studentRepository.updateStudentById(s.get(0).getId(), "Q");
-        try {
-            Thread.sleep(20000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        studentRepository.updateStudentById(s.get(0).getId(), "Scheduled");
         return s;
     }
 }

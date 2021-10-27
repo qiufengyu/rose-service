@@ -1,6 +1,5 @@
 package com.pure.rose.service;
 
-import com.pure.rose.entity.Course;
 import com.pure.rose.entity.Student;
 import com.pure.rose.repository.CourseRepository;
 import com.pure.rose.repository.StudentRepository;
@@ -20,6 +19,7 @@ public class StudentService {
     @Autowired
     CourseRepository courseRepository;
 
+    @Autowired
     UtilService utilService;
 
     @Autowired

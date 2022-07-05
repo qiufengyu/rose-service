@@ -1,7 +1,7 @@
 package com.pure.rose.controller;
 
+import com.pure.rose.dto.Person;
 import com.pure.rose.entity.Student;
-import com.pure.rose.repository.StudentRepository;
 import com.pure.rose.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +23,11 @@ public class StudentController {
     public @ResponseBody
     List<Student> getStudents(@PathVariable(name = "status")String status) {
         return studentService.schedule(status);
+    }
+
+    @PostMapping()
+    public @ResponseBody Person testStudent(@RequestBody Person person) {
+        return studentService.getPerson(person);
     }
 
 }

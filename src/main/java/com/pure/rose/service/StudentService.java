@@ -1,6 +1,7 @@
 package com.pure.rose.service;
 
-import com.pure.rose.entity.Course;
+import com.pure.rose.dto.Person;
+import com.pure.rose.dto.StudentDTO;
 import com.pure.rose.entity.Student;
 import com.pure.rose.repository.CourseRepository;
 import com.pure.rose.repository.StudentRepository;
@@ -46,5 +47,14 @@ public class StudentService {
         List<Student> s = studentRepository.findStudentByStatus(status);
         studentRepository.updateStudentById(s.get(0).getId(), "Scheduled");
         return s;
+    }
+
+    public Person getPerson(Person person) {
+        StudentDTO ns = new StudentDTO();
+        if (person instanceof StudentDTO s) {
+            ns.setStudentName(s.getStudentName());
+            ns.setType(person.getType());
+        }
+        return ns;
     }
 }

@@ -1,8 +1,9 @@
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/godfray
-    username: rose
+    url: jdbc:postgresql://localhost:5432/rose
+    username: postgres
+    password: postgres
   jpa:
     show-sql: true
     generate-ddl: true
